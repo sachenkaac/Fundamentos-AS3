@@ -1,0 +1,43 @@
+/* Prorgrama que calcule el número de fibonacci. Recursivo*/
+package FUNDAMENTOS_TODO;
+import java.util.*;
+import java.util.Scanner;
+public class Fibonacci_Recursivo {
+ public static void main(String[] args) {
+ Scanner sc= new Scanner(System.in);
+ int n= 0, n1 = 1, fib, i=0, a=0;
+ char res;
+ System.out.println("¿Quieres saber un número de la serie de fibonacci? s/n");
+ res= sc.next().charAt(0);
+ while (res== 's'){
+ System.out.println("INGRESA EL NÚMERO DE FIBONACCI QUE DESEAS SABER");
+ fib= sc.nextInt();
+ if(fib>=0){
+ for(i= 0; i<fib-2; i++){
+ n1 = n+ n1;
+ n=n1-n;
+ }
+ System.out.println("El número es: ");
+ System.out.println(n1);
+ }
+ System.out.println("¿Deseas saber otro número de la serie? s/n");
+ res=sc.next().charAt(0);
+ }}}
+ 
+ FIBONACCI 2
+Interativo
+/*Programa que calcule el número de fibonacci. Interativo*/
+package FUNDAMENTOS_TODO;
+import java.util.*;
+import java.util.Scanner;
+public class Fibonacci_Iterativo {
+ public static void main(String[] args) {
+ Scanner sc= new Scanner(System.in);
+ int n= 0, n1 = 1, fib, i=0;
+ System.out.println("INGRESA EL NÚMERO DE FIBONACCI QUE DESEAS SABER");
+ fib= sc.nextInt();
+ for(i= 0; i<fib-2; i++){
+ n1 = n+ n1;
+ n=n1-n;
+ }
+ System.out.println(n1); }}
