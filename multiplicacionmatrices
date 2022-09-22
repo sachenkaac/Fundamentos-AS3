@@ -1,0 +1,49 @@
+/*
+Multiplicar dos matrices, una de 3x2 por otra de 2x3, asignados por uuario, imprimir la resultante
+ */
+package FUNDAMENTOS3;
+
+import java.util.Scanner;
+
+/**
+
+ */
+public class MultiplicaciondeMatrices {
+     
+     public static void main (String[]Args){
+          Scanner sc=new Scanner (System.in);
+         int a[][] = new int [2][3];
+         int b[][] = new int [3][2];
+         int c[][] = new int [2][2];
+         int i, j;
+         System.out.println("-SE MULTIPLICARÁN DOS MATRICES-");   
+         System.out.println("Datos de la Matriz A :");        
+         for (i=0; i<2; i++){
+             for (j=0; j<3; j++){
+                 System.out.print("Ingresa dats para a "+i+j);
+                 a [i][j]= sc.nextInt();
+                }
+            }
+         for (i=0; i<3; i++){
+             for (j=0; j<2; j++){
+                 System.out.print("Ingresa datos para b "+1+j);
+                 b [i][j]= sc.nextInt();
+                }
+            }
+            
+            for (i=0; i<2; i++){
+             for (j=0; j<2; j++){
+                 c [i][j]= a[i][j]*b[i][j]+c[i][j];
+                }
+            }
+            
+            System.out.println("Resultado :");
+    for (i=0;i<2;i++){
+            for (j=0;j<2;j++) {
+                System.out.print(c[i][j] + " ");
+            }
+            System.out.println("");
+            
+        }
+    }
+}
