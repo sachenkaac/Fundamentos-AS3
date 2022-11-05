@@ -1,0 +1,108 @@
+
+package fundamentos_3;
+
+import java.util.LinkedList;
+import java.util.List;
+
+
+public class arboles<A> implements ITree<A>{
+    private A padre;
+    private LinkedList<ITree<A>> hijo;
+    arboles(A padre){
+        this.padre = padre;
+        hijo = new LinkedList<>();
+    }
+    public A padre() {
+        return padre;
+    }
+    public boolean Fin() {
+        return hijo.isEmpty();
+    }
+    public int numberSubTrees() {
+        return hijo.size();
+    }
+    public ITree<A> getSubTree(int i) {
+        return hijo.get(i);
+    }
+    public void addSubTree(ITree<A> subtree) {
+        hijo.add(subtree);
+    }
+      public List<A> preorder() {
+        return _preorder(new LinkedList<>());
+    }
+  private List<A> _preorder(List<A> result){
+        result.add(padre);
+        if (!Fin()){
+            for (ITree<A> subtree: hijo) {
+                ((arboles)subtree)._preorder(result);
+            }
+        }
+        return result;
+    }   
+    public List<A> inorder() {
+        return Inorder(new LinkedList<>());
+    }
+    private List<A> Inorder(List<A> result){
+        if (Fin()) {
+            result.add(padre);
+        }
+        else{
+            ((arboles)hijo.get(0)).Inorder(result);
+            result.add(padre);
+            for (int i=1; i<numberSubTrees(); i++) {
+                ((arboles)hijo.get(i)).Inorder(result);
+            }
+        }
+        return result;
+    }
+    public List<A> postorder() {
+        return Postorder(new LinkedList<>());
+    }
+    private List<A> Postorder(List<A> result){
+        for (int i=0; i<numberSubTrees(); i++) {
+            ((arboles)hijo.get(i)).Postorder(result);
+        }
+        result.add(padre);
+        return result;
+    }
+    public int Ramas() {
+        if(Fin())
+            return 0;
+        int max = 0;
+        for (int i = 0; i < hijo.size(); i++)
+        {
+            int h = hijo.get(i).Ramas();
+            if(max < h)
+                max = h;
+        }
+        return max+1;
+    }
+    interface ITree<A> {
+    public int Ramas();
+    public class Imprimirarbol {
+    public static void main(String[] args){
+        arboles<String> tree = new arboles<>("10");
+        arboles<String> subtree1 = new arboles<>("1");
+        arboles<String> subtree2 = new arboles<>("2");
+          tree.addSubTree((ITree<String>) subtree1);
+        tree.addSubTree((ITree<String>) subtree2);
+        List<String> preoderList = tree.preorder();
+        System.out.println("Anteriot:");
+        printList(preoderList);
+        List<String> inorderList = tree.inorder();
+        System.out.println("Adentro:");
+        printList(inorderList);
+        List<String> postorderList = tree.postorder();
+        System.out.println("Despues:");
+        printList(postorderList);
+        System.out.println("Estructura del arbol:");
+        TreeUtils.printTreeToConsole(tree,"");
+    }
+    static <A> void printList(List<A> list){
+        for(A b: list){
+            System.out.print(b + ", ");
+        }
+        System.out.println();
+    }
+    }
+    }}
